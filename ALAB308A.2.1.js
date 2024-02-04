@@ -35,7 +35,11 @@ class Character {
       this.inventory = [];
     }
 
-    roll = function (mod = 0) {
+    //Part 4: Class Uniforms
+    static MAX_HEALTH = 100;
+    static ROLES = ["Fighter", "Healer", "Wizard", "Dragon", "Werewolf","Adventurer"];
+    
+    roll (mod = 0) {
         const result = Math.floor(Math.random() * 20) + 1 + mod;
         console.log(`${this.name} rolled a ${result}.`)
     }
@@ -57,19 +61,21 @@ class Adventurer extends Character {
       super(name);
       // Adventurers have specialized roles.
       this.role = role;
+      if(this.role != "Adventurer"){
+        return console.log(`${this.name} is a ${this.role} and can't wear the Adventurer outfit!`)
+      }
       // Every adventurer starts with a bed and 50 gold coins.
       this.inventory.push("bedroll", "50 gold coins");
       // Adventurers start with a bow.
       this.inventory.push("bow");
     }
-    //Part 4: Class Uniforms
-    static MAX_HEALTH = 100;
-    static ROLES = ["Fighter", "Healer", "Wizard", "Dragon", "Werewolf","Adventurer"];
+   
     // Adventurers have the ability to scout ahead of them.
     scout () {
       console.log(`${this.name} is scouting ahead...`);
       super.roll();
     }
+
     // Adventurers can bargin with NPCs
     bargin () {
         console.log(`${this.name} is bargaining...`);
@@ -101,4 +107,4 @@ class Adventurer extends Character {
   // robin.companion.companion.type = "Flea";
   // robin.companion.companion.inventory = ["small hat", "sunglasses"];
   
-  // robin.roll();
+robin.roll();
