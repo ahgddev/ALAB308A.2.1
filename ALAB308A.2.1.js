@@ -42,6 +42,7 @@ class Character {
     roll (mod = 0) {
         const result = Math.floor(Math.random() * 20) + 1 + mod;
         console.log(`${this.name} rolled a ${result}.`)
+        return result
     }
   }
 
@@ -88,7 +89,35 @@ class Adventurer extends Character {
             return true
         }
       } 
-  }
+
+      duel (adv) {
+    while (this.health > 50 && adv.health > 50){
+        let roll1 = this.roll();
+        let roll2 = adv.roll();
+        if(roll1 > roll2){
+            roll2 -= 1;
+            adv.health -= roll2
+        } else {
+            roll1 -= 1;
+            this.health -= roll1
+        }
+        console.log(`Duel Result: ${this.name} did ${roll1} dmg! ${adv.name} did ${roll2} dmg! ${this.name} has ${this.health} and ${adv.name} has ${adv.health}`)
+        }
+        if(this.health < 50){
+            console.log(`${this.name} lost...`)
+        }
+        else if(adv.health < 50){
+            console.log(`${adv.name} lost...`)
+        }
+    }
+//         Accept an Adventurer as a parameter.
+// Use the roll() functionality to create opposing rolls for each adventurer.
+// Subtract 1 from the adventurer with the lower roll.
+// Log the results of this “round” of the duel, including the rolls and current health values.
+// Repeat this process until one of the two adventurers reaches 50 health.
+// Log the winner of the duel: the adventurer still above 50 health.
+      }
+
 
   class Companion extends Character {
     constructor (name, type) {
@@ -98,6 +127,7 @@ class Adventurer extends Character {
   }
 
   const robin = new Adventurer("Robin","Adventurer");
+  const rival = new Adventurer("Rival","Adventurer");
   const leo = new Companion("Leo", "Cat");
   const frank = new Companion("Frank", "Flea")
   // robin.inventory = ["sword", "potion", "artifact"];
@@ -133,3 +163,4 @@ class AdventurerFactory {
   const robin4 = healers.generate("Robbi");
 
 console.log(healers.findByName("Robert"))
+robin.duel(rival)
