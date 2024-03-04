@@ -1,4 +1,4 @@
-import Character from "./character";
+let Character = require("./character");
 
 class Adventurer extends Character {
     constructor (name, role) {
@@ -55,7 +55,31 @@ class Adventurer extends Character {
     }
 }
 
+class AdventurerFactory {  
+    constructor (role) {
+      this.role = role;
+      this.adventurers = [];
+    }
+    generate (name) {
+      const newAdventurer = new Adventurer(name, this.role);
+      this.adventurers.push(newAdventurer);
+    }
+    findByIndex (index) {
+      return this.adventurers[index];
+    }
+    findByName (name) {
+      return this.adventurers.find((a) => a.name === name);
+    }
+  }
+  
+  const healers = new AdventurerFactory("Healer");
+  const robin2 = healers.generate("Robin");
+  const robin3 = healers.generate("Robert");
+  const robin4 = healers.generate("Robbi");
+
+console.log(healers.findByName("Robert"));
+
 const robin = new Adventurer("Robin","Adventurer");
 const rival = new Adventurer("Rival","Adventurer");
 
-export default {robin, rival};
+module.exports = { robin, rival};

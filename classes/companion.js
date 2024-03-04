@@ -1,4 +1,4 @@
-import Character from "./character";
+let Character = require("./character");
 
 class Companion extends Character {
     constructor (name, type) {
@@ -10,4 +10,4 @@ class Companion extends Character {
   const leo = new Companion("Leo", "Cat");
   const frank = new Companion("Frank", "Flea");
 
-  export default {leo, frank};
+  module.exports = { leo, frank};
